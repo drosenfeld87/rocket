@@ -1,4 +1,6 @@
 class Rocket
+    attr_reader :name, :colour, :flying
+
   def initialize(options = {})
     @name = options[:name] || random_name
     @colour = options[:colour] || random_colour

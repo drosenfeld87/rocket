@@ -11,41 +11,30 @@ class RocketTest < Minitest::Test
     @rocket = nil
   end
 
-  # def test_new_name
-  # #arrange
-  # @rocket.new_name {}
-  # #act
-  # actual = @rocket.name
-  # expected = {}
-  # #assert
-  # refute_equal(expected, actual)
-  # end
-  #
-  # def test_new_name_different_than_original
-  #   #arrange
-  #   @rocket.new_name {}
-  #   #act
-  #   new_name = @rocket.name
-  #   original_name = {}
-  #   #assert
-  #   refute_equal(new_name, original_name)
-  # end
+  def test_new_name
+  #arrange
+  @rocket.name = ""
+  #act
+  actual = @rocket.name
+  expected = ""
+  #assert
+  assert_equal(expected, actual)
+  end
 
-  def test_lift_off_return_true_when_flying
+  def test_lift_off_return_false_when_flying
     #arrange
-    @rocket.flying
+    @rocket = Rocket.new({:flying => true})
     #act
-    actual = @rocket.flying?
+    actual = @rocket.lift_off
     expected = false
     #assert
     assert_equal(expected, actual)
   end
-  def test_lift_off_return_false_when_flying
+  def test_lift_off_return_true_when_flying
     #arrange
-    @rocket.flying
     #act
-    actual = @rocket.flying?
-    expected = false
+    actual = @rocket.lift_off
+    expected = true
     #assert
     assert_equal(expected, actual)
   end
@@ -70,13 +59,22 @@ class RocketTest < Minitest::Test
   end
 
 
-  def test_status
+  def test_status_flying
+    #arrange
+    @rocket = Rocket.new({:flying => true})
+    #act
+    actual = @rocket.status
+    expected = "Rocket #{@rocket.name} is flying through the sky!"
+    #assert
+    assert_equal(expected, actual)
+  end
+
+  def test_status_not_flying
     #arrange
     @rocket.flying?
-    @rocket.status = true
     #act
-    actual = @rocket.flying?
-    expected = "Rocket #{name} is flying through the sky!"
+    actual = @rocket.status
+    expected = "Rocket #{@rocket.name} is ready for lift off!"
     #assert
     assert_equal(expected, actual)
   end
